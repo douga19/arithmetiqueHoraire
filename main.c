@@ -9,38 +9,54 @@ typedef struct{
 
 TIME add(TIME t1,TIME t2);
 void display(TIME t);
-char** splitChar(int n,char* str,const char* delim);
+char** splitChar(int n,char* str,const char delim);
 int getNombreMots(char* str, const char delim);
+int toInt(char* str);
+void titre();
 
 
 int main(){
-    printf("******************************************\n");
-    printf("*          Aritmethique horaire          *\n");
-    printf("******************************************\n\n");
+    char* chiffre = "12";
+    printf("%d",chiffre);
 
-    //entrée des données
-    int i = 0;
-    char *str;
-    str = "je:suis:rado:et:oui";
-
-    i = getNombreMots(str,':');
-    printf("Il y a %d mot(s)\n",i);
-
-
-
-    //sortie des résultats
     return 0;
 }
 
-/*char** splitChar(int n, char* str,const char* delim){
-    char** t = NULL;
-    int i = 0;
-    t = malloc(n*sizeof(char*));
-    for(i = 0;i < n;i++){
-        *t[i] = malloc()
-    }
+int toInt(char* str){
+    int thisInt = 0, i = 0;
+    while (str[i]){
 
-}*/
+        i++;
+    }
+    return thisInt;
+}
+
+char** splitChar(int n, char* str,const char delim){
+    char** t = NULL;
+    int i = 0,ligne = 0,colonne = 0;
+
+    t = malloc(n*sizeof(char*));
+
+    t[0] = malloc(sizeof(char));
+
+    while(str[i]){
+        if(str[i] == delim){
+            t[ligne][colonne] = '\0';
+            ligne++;
+            colonne = 0;
+            t[ligne] = malloc(sizeof(char));
+        }
+        else {
+            t[ligne][colonne] = str[i];
+            colonne++;
+        }
+        i++;
+    }
+    t[ligne][colonne] = '\0';
+
+    return t;
+
+}
 
 int getNombreMots(char* str,const char delim){
     int i,n = 0;
@@ -65,4 +81,10 @@ TIME add(TIME t1,TIME t2){
 
 void display(TIME t){
     printf("%i : %i",t.hour,t.minute);
+}
+
+void titre(){
+    printf("******************************************\n");
+    printf("*          Aritmethique horaire          *\n");
+    printf("******************************************\n\n");
 }
